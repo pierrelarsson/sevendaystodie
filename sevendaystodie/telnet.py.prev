@@ -1,0 +1,126 @@
+import socket
+import select
+import time
+import re
+import logging
+
+LOGGER = logging.getLogger(__name__)
+
+class Telnet(object):
+    boolean = {
+        True: b'true',
+        False: b'false'
+    }
+
+    def __init__(self, host='127.0.0.1', port=8081):
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock.settimeout(60)
+        self.address = (host, port)
+        self._buffer = b''
+
+    def connect(self):
+        self._buffer = b''
+        LOGGER.debug("connecting to {0}:{1}".format(self.address[0], self.address[1]))
+        self.sock.connect(self.address)
+        LOGGER.info("connected to {0}:{1}".format(*self.sock.getpeername()))
+        try:
+            response = self.recv(b'to end session.\r\n\r\n')
+            messages = dict(re.findall(b'\n([\w ]*):\s*([\w. ]*)\r', response, re.IGNORECASE))
+            for key, value in messages.items():
+                LOGGER.info("{0}: [{1}]".format(key, value))
+        except TypeError:
+            LOGGER.error("failed to parse welcome message")
+        if not self.loglevel(enabled=False):
+            LOGGER.critical("failed to disable logging")
+            self.disconnect()
+            return False
+        return True
+
+    def recv(self, match=b'\r\n', timeout=60):
+        limit = time.time() + timeout
+        while timeout < 0 or limit > time.time():
+            (before, itself, after) = self._buffer.partition(match)
+            if itself:
+                self._buffer = after
+                return before+itself
+            try:
+                data = self.sock.recv(2048)
+                LOGGER.debug("read: [{0}]".format(data))
+                if len(data) == 0:
+                    raise EOFError
+                self._buffer += data
+            except socket.timeout:
+                pass
+        LOGGER.warn("flushing read buffer: [{0}]".format(self._buffer))
+        self._buffer = b''
+        return None
+
+    def gettime(self):
+        self.sock.sendall(b"gettime\r\n")
+        return self.recv()
+
+    def listplayers(self):
+        request = b"listplayers\r\n"
+        self.sock.sendall(request)
+        return self.recv(b'in the game\r\n')
+
+    def listents(self):
+        request = b"listents\r\n"
+        self.sock.sendall(request)
+        return self.recv(b'in the game\r\n')
+
+    def listents(self):
+        request = b"listents\r\n"
+        self.sock.sendall(request)
+        return self.recv(b'in the game\r\n')
+
+    def getgamepref(self):
+        request = b"getgamepref\r\n.\r\n"
+        self.sock.sendall(request)
+        return self.recv(b'\'.\'\r\n')
+
+    def loglevel(self, level='ALL', enabled=True):
+        request = b"loglevel " + level.encode('ascii') + b" " + self.boolean[enabled] + b"\r\n"
+        self.sock.sendall(request)
+        return self.recv(b'on this connection.\r\n')
+
+    def command(self, command, expect=None):
+        LOGGER.info("Executing command: [{0}]".format(command.encode('utf-8')))
+        if expect:
+            self.sock.sendall(command.encode('ascii') + b"\r\n")
+            return self.recv(expect)
+        else:
+            self.sock.sendall(command.encode('ascii') + b"\r\n.\r\n")
+            self.recv()
+
+
+    @property
+    def connected(self):
+        try:
+            self.sock.getpeername()
+            return True
+        except OSError:
+            return False
+
+    def disconnect(self):
+        if self.connected:
+            LOGGER.debug("disconnecting from {0}:{1}".format(*self.sock.getpeername()))
+            self.sock.sendall(b'exit\r\n')
+            self.sock.close()
+            LOGGER.info("disconnected from {0}:{1}".format(self.address[0], self.address[1]))
+        return True
+
+    def __del__(self):
+        self.disconnect()
+
+    def __iter__(self):
+        return None
+        self.sock.sendall(b'loglevel ALL true\r\n')
+        response = self.recv(b'on this connection.\r\n')
+        if response:
+            self.sock.settimeout(None)
+            return self
+        return None
+
+    def __next__(self):
+        return self.recv(timeout=-1)
