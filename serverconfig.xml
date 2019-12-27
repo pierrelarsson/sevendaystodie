@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<ServerSettings>
+	<!-- GENERAL SERVER SETTINGS -->
+
+	<!-- Server representation -->
+	<property name="ServerName"				value="The World's End [PvP|EU]"/>
+	<property name="ServerDescription"			value="[FFAE00]The World's End[-]
+
+PvP | Vanilla Files | 8K Map
+200% XP | Reduced LVL/XP penalty | 200% Loot
+2 LCB's | 41x41 Claims"/>
+	<property name="ServerWebsiteURL"			value="https://discord.gg/m4rzrnj"/>
+	<property name="ServerPassword"				value=""/>
+	<property name="ServerLoginConfirmationText"		value="[CC0000]By joining this server, you agree to following.[-]
+
+[FFAE00]The usual rules apply.[-] Have fun, respect other players, be kind. Don't destroy other players vehicles unless they use it to cause harm to you.
+
+[FFAE00]Don't cheat.[-] This includes all forms of cheating, glitching and exploiting. You'll get banned and that's no fun.
+
+[FFAE00]This is a PvP server.[-] But please go easy on new/low level players (unless they shoot you), eg. by not looting them if you'd happen to kill one.
+
+[FFAE00]Raiding is allowed.[-] But without vehicles nor zombies. And we do not tolerate unnecessary destruction/griefing/collapsing of others players bases.
+
+[FFAE00]Don't claim in cities.[-] We reset citys each sunday, so you might loose all your stuff.
+
+[FFAE00]No killing at traders.[-] And no camping nor claiming in the close vicinity.
+
+[FFAE00]The preferred language is English.[-] Please keep lengthy discussions in other languages in private chats.
+
+Join us on Discord at [1E90FF]https://discord.gg/m4rzrnj[-]" />
+
+	<!-- Networking -->
+	<property name="ServerPort"				value="26900"/>
+	<property name="ServerVisibility"			value="2"/>			<!-- 2 = public, 1 = only shown to friends, 0 = not listed -->
+	<property name="ServerDisabledNetworkProtocols"		value="SteamNetworking"/>
+	<property name="ServerMaxWorldTransferSpeedKiBs"	value="1024"/>			<!-- Maximum is about 1300 kiB/s -->
+
+	<!-- Slots -->
+	<property name="ServerMaxPlayerCount"			value="44"/>
+	<property name="ServerReservedSlots"			value="0"/>
+	<property name="ServerReservedSlotsPermission"		value="100"/>
+	<property name="ServerAdminSlots"			value="2"/>
+	<property name="ServerAdminSlotsPermission"		value="10"/>
+
+	<!-- Admin interfaces -->
+	<property name="ControlPanelEnabled"			value="false"/>
+	<property name="ControlPanelPort"			value="8080"/>
+	<property name="ControlPanelPassword"			value="XXXXXXXXXXXXXXXX"/>
+
+	<property name="TelnetEnabled"				value="true"/>	
+	<property name="TelnetPort"				value="8081"/>
+	<property name="TelnetPassword"				value="XXXXXXXXXXXXXXXX"/>
+	<property name="TelnetFailedLoginLimit"			value="3"/>
+	<property name="TelnetFailedLoginsBlocktime"		value="10"/>
+
+	<property name="TerminalWindowEnabled"			value="false"/>
+
+	<!-- Folder and file locations -->
+	<property name="AdminFileName"				value="serveradmin.xml"/>
+	<property name="UserDataFolder"				value="/srv/7daystodie/GeneratedWorlds"/>
+	<property name="SaveGameFolder"				value="/srv/7daystodie/Saves"/>
+
+	<!-- Other technical settings -->
+	<property name="EACEnabled"				value="true"/>			<!-- Enables/Disables EasyAntiCheat -->
+	<property name="HideCommandExecutionLog"		value="0"/>			<!-- 0 = show everything, 1 = hide only from Telnet/ControlPanel, 2 = also hide from remote game clients, 3 = hide everything -->
+	<property name="MaxUncoveredMapChunksPerPlayer"		value="131072"/>		<!-- Override how many chunks can be uncovered on the ingame map by each player. Resulting max map file size limit per player is (x * 512 Bytes), uncovered area is (x * 256 m²). Default 131072 means max 32 km² can be uncovered at any time -->
+	<property name="PersistentPlayerProfiles"		value="false" />		<!-- If disabled a player can join with any selected profile. If true they will join with the last profile they joined with -->
+
+	<!-- GAMEPLAY -->
+	
+	<!-- World -->
+	<property name="GameWorld"				value="RWG"/>
+	<property name="WorldGenSeed"				value="Letchworth"/>
+	<property name="WorldGenSize"				value="8192"/>
+	<property name="GameName"				value="Letchworth"/>
+	<property name="GameMode"				value="GameModeSurvival"/>
+
+	<!-- Difficulty -->
+	<property name="GameDifficulty"				value="3"/>			<!-- 0 => Scavenger/Easiest, 1 => Adventurer/Easy, 2 => Nomad/Normal, 3 => Warrior/Hard, 4 => Survivalist/Harder, 5 => Insane/Hardest -->
+	<property name="BlockDamagePlayer"			value="100" />			<!-- How much damage do players to blocks (percentage in whole numbers) -->
+	<property name="BlockDamageAI"				value="75" />			<!-- How much damage do AIs to blocks (percentage in whole numbers) -->
+	<property name="BlockDamageAIBM"			value="100" />			<!-- How much damage do AIs during blood moons to blocks (percentage in whole numbers) -->
+	<property name="XPMultiplier"				value="300" />			<!-- XP gain multiplier (percentage in whole numbers) -->
+	<property name="PlayerSafeZoneLevel"			value="2" />			<!-- If a player is less or equal this level he will create a safe zone (no enemies) when spawned -->
+	<property name="PlayerSafeZoneHours"			value="24" />			<!-- Hours in world time this safe zone exists -->
+
+	<!--  -->
+	<property name="BuildCreate"				value="false" />		<!-- cheat mode on/off -->
+	<property name="DayNightLength"				value="90" />			<!-- real time minutes per in game day: 60 minutes -->
+	<property name="DayLightLength"				value="18" />			<!-- in game hours the sun shines per day: 18 hours day light per in game day -->
+	<property name="DropOnDeath"				value="3" />			<!-- 0 = nothing, 1 = everything, 2 = toolbelt only, 3 = backpack only, 4 = delete all -->
+	<property name="DropOnQuit"				value="0" />			<!-- 0 = nothing, 1 = everything, 2 = toolbelt only, 3 = backpack only -->
+	<property name="BedrollDeadZoneSize"			value="15" />			<!-- Size (box "radius", so a box with 2 times the given value for each side's length) of bedroll deadzone, no zombies will spawn inside this area, and any cleared sleeper volumes that touch a bedroll deadzone will not spawn after they've been cleared. -->
+	<property name="BedrollExpiryTime"			value="14" />			<!-- Number of days a bedroll stays active after owner was last online -->
+
+	<!-- Performance related -->
+	<property name="MaxSpawnedZombies"			value="90" />
+	<property name="MaxSpawnedAnimals"			value="90" />
+	<property name="ServerMaxAllowedViewDistance"		value="10" />
+
+	<!-- Zombie settings -->
+	<property name="EnemySpawnMode"				value="true" />			<!-- Enable/Disable enemy spawning -->
+	<property name="EnemyDifficulty"			value="0" />			<!-- 0 = Normal, 1 = Feral -->
+	<property name="ZombieMove"				value="0" />			<!-- 0 = Walk, 1 = Jog, 2 = Run, 3 = Sprint, 4 = Nightmare) -->
+	<property name="ZombieMoveNight"			value="3" />			<!-- Zombie speed at night -->
+	<property name="ZombieFeralMove"			value="2" />			<!-- Feral Zombie speed -->
+	<property name="ZombieBMMove"				value="3" />			<!-- Zombie BloodMoon speed -->
+	<property name="BloodMoonFrequency"			value="7" />			<!-- What frequency (in days) should a blood moon take place. Set to "0" for no blood moons -->
+	<property name="BloodMoonRange"				value="0" />			<!-- How many days can the actual blood moon day randomly deviate from the above setting. Setting this to 0 makes blood moons happen exactly each Nth day as specified in BloodMoonFrequency -->
+	<property name="BloodMoonWarning"			value="8" />			<!-- The Hour number that the red day number begins on a blood moon day. Setting this to -1 makes the red never show.  -->
+	<property name="BloodMoonEnemyCount"			value="8" />			<!-- The number of zombies spawned during blood moons per player. -->
+
+	<!-- Loot -->
+	<property name="LootAbundance"				value="200" />			<!-- percentage in whole numbers -->
+	<property name="LootRespawnDays"			value="2" />			<!-- days in whole numbers -->
+	<property name="AirDropFrequency"			value="24"/>			<!-- How often airdrop occur in game-hours, 0 == never -->
+	<property name="AirDropMarker"				value="true"/>			<!-- Sets if a marker is added to map/compass for air drops. -->
+
+	<!-- Multiplayer -->
+	<property name="PartySharedKillRange"			value="500"/>			<!-- The distance you must be within to receive party shared kill xp and quest party kill objective credit. -->
+	<property name="PlayerKillingMode"			value="3" />			<!-- Player Killing Settings (0 = No Killing, 1 = Kill Allies Only, 2 = Kill Strangers Only, 3 = Kill Everyone) -->
+
+	<!-- Land claim options -->
+	<property name="LandClaimCount"				value="2"/>			<!-- Maximum allowed land claims per player. -->
+	<property name="LandClaimSize"				value="41"/>			<!-- Size in blocks that is protected by a keystone -->
+	<property name="LandClaimDeadZone"			value="30"/>			<!-- Keystones must be this many blocks apart (unless you are friends with the other player) -->
+	<property name="LandClaimExpiryTime"			value="14"/>			<!-- The number of days a player can be offline before their claims expire and are no longer protected -->
+	<property name="LandClaimDecayMode"			value="2"/>			<!-- Controls how offline players land claims decay. All claims have full protection for the first 24hrs. 0=Linear, 1=Exponential, 2=Full protection until claim is expired. -->
+	<property name="LandClaimOnlineDurabilityModifier"	value="16"/>			<!-- How much protected claim area block hardness is increased when a player is online. 0 means infinite (no damage will ever be taken). Default is 4x -->
+	<property name="LandClaimOfflineDurabilityModifier"	value="16"/>			<!-- How much protected claim area block hardness is increased when a player is offline. 0 means infinite (no damage will ever be taken). Default is 4x -->
+</ServerSettings>
